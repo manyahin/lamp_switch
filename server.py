@@ -2,7 +2,7 @@ import socketio
 import eventlet
 import eventlet.wsgi
 from flask import Flask, render_template
-#from gpiozero import LED
+from gpiozero import LED
 
 sio = socketio.Server()
 app = Flask(__name__)
@@ -12,10 +12,10 @@ lampStatus = False;
 def switchLamp():
     global lampStatus
     if (lampStatus == True):
-#        led.on()
+        led.on()
         lampStatus = False
     else:
-#        led.off()
+        led.off()
         lampStatus = True
     print lampStatus
 
