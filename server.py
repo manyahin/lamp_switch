@@ -2,26 +2,29 @@ import socketio
 import eventlet
 import eventlet.wsgi
 from flask import Flask, render_template
-from gpiozero import LED
+#from gpiozero import LED
 
 sio = socketio.Server()
 app = Flask(__name__)
 
+#led = LED(7)
 lampStatus = False;
 def switchLamp():
+    global lampStatus
     if (lampStatus == True):
-        led.off()
-        lampStatus = True
-    else:
-        led.on()
+#        led.on()
         lampStatus = False
+    else:
+#        led.off()
+        lampStatus = True
+    print lampStatus
 
 @app.route('/')
 def index():
     """Serve the client-side application."""
     return render_template('./index.html')
 
-@sio.on('change', namespace='/switch')
+@sio.on('change')
 def change(sid, environ):
     print("change ", sid)
     switchLamp()

@@ -40,16 +40,13 @@
     /**
      * You must include the dependency on 'ngMaterial' 
      */
-    angular.module('LampApp', ['ngMaterial', 'btford.socket-io'])
-      .factory('mySocket', function (socketFactory) {
-        var socket = io();
-        return socket;
-      })
-      .controller('LampController', function($scope, mySocket) {
+    angular.module('LampApp', ['ngMaterial'])
+      .controller('LampController', function($scope) {
         $scope.lamp = false;
+        $scope.socket = io();
 
         $scope.$watch('lamp', function() {
-          mySocket.emit('change', 'change');
+          $scope.socket.emit('change', 'change');
         }, true);
       });
   </script>
